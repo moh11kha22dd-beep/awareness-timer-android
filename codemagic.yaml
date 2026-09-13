@@ -1,0 +1,24 @@
+workflows:
+  android-apk:
+    name: Build Awareness Timer APK
+    max_build_duration: 30
+
+    environment:
+      java: 17
+
+    scripts:
+      - name: Unpack project
+        script: |
+          rm -rf awareness-timer-android
+          unzip -q awareness-timer-android-v0.2.0-fixed.zip
+
+      - name: Build APK
+        script: |
+          cd awareness-timer-android
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+          wget -q https://services.gradle.org/distributions/gradle-8.9-bin.zip -O /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle
+          /tmp/gradle/gradle-8.9/bin/gradle assembleDebug
+
+    artifacts:
+      - awareness-timer-android/app/build/outputs/apk/debug/app-debug.apk
