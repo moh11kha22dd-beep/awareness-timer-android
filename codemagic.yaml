@@ -10,7 +10,7 @@ workflows:
       - name: Unpack project
         script: |
           rm -rf awareness-timer-android
-          unzip -q awareness-timer-android-v0.2.0-fixed.zip
+          unzip -q awareness_timer_update_v033.zip
 
       - name: Build APK
         script: |
